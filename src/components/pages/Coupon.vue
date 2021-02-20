@@ -1,5 +1,6 @@
 <template>
   <div>
+    <loading :active.sync="isLoading"></loading>
     <div class="text-right mt-4">
       <button class="btn btn-primary" @click="openCoupon(true)">建立新的優惠券</button>
     </div>
@@ -29,6 +30,7 @@
           </tr>
       </tbody>
     </table>
+    <Pagination :pages="pagination" @set-page="getCoupon"></Pagination>
     <!-- coupon modal -->
     <div
       class="modal fade"
@@ -151,14 +153,20 @@
 
 <script>
 import $ from 'jquery'
+import Pagination from '../Pagination'
 export default {
   data () {
     return {
       isNew: false,
       coupons: [],
       tempCoupon: {},
-      due_date: new Date()
+      due_date: new Date(),
+      pagination: {},
+      isLoading: false
     }
+  },
+  components: {
+    Pagination
   },
   watch: {
     due_date () {
@@ -168,11 +176,14 @@ export default {
     }
   },
   methods: {
-    getCoupon () {
-      let api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/coupons`
+    getCoupon (page = 1) {
+      let api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/coupons?page=${page}`
       const vm = this
+      vm.isLoading = true
       vm.$http.get(api).then(function (res) {
         vm.coupons = res.data.coupons
+        vm.pagination = res.data.pagination
+        vm.isLoading = false
       })
     },
     openCoupon (isNew, item, clear) {

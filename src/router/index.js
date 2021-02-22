@@ -6,7 +6,7 @@ import Products from '@/components/pages/Products'
 import Coupon from '@/components/pages/Coupon'
 import Order from '@/components/pages/Order'
 import CustomerOrder from '@/components/pages/CustomerOrder'
-import CustomerCheckout from '@/components/pages/CUstomerCheckout'
+import CustomerCheckout from '@/components/pages/CustomerCheckout'
 
 Vue.use(Router)
 

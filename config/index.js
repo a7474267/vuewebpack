@@ -9,7 +9,7 @@ module.exports = {
 
     // Paths
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/vuewebpack/dist/',
+    assetsPublicPath: '/vuewebpack/',
     proxyTable: {},
 
     // Various Dev Server settings
